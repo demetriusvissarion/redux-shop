@@ -13,6 +13,7 @@ function App() {
   const dispatch = useDispatch();
   const showCart = useSelector((state) => state.ui.showCart);
   const cart = useSelector((state) => state.cart); // subscription
+  // console.log(cart);
   const notification = useSelector((state) => state.ui.notification);
 
   useEffect(() => {

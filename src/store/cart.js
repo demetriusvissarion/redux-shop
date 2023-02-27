@@ -41,6 +41,7 @@ const cartSlice = createSlice({
   },
 });
 
+// Custom action creator function that can perform side effects and dispatch other actions (flow of side effects)
 export const sendCartData = (cart) => {
   return async (dispatch) => {
     dispatch(
