@@ -10,10 +10,14 @@ function App() {
   const cart = useSelector((state) => state.cart); // subscription
 
   useEffect(() => {
+    // const sendCartData = async () => {
     fetch(
       "https://redux-shop-3a34c-default-rtdb.europe-west1.firebasedatabase.app/cart.json",
       { method: "PUT", body: JSON.stringify(cart) }
     );
+    // };
+
+    // const responseData =
   }, [cart]); // 'PUT' overwrites existing data
 
   return (
