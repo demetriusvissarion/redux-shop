@@ -5,9 +5,10 @@ const cartSlice = createSlice({
   initialState: {
     items: [],
     totalQuantity: 0,
-    totalAmount: 0,
+    changed: false,
   },
   reducers: {
+    // saves cart to firebase and fetches data on refresh
     replaceCart(state, action) {
       state.totalQuantity = action.payload.totalQuantity;
       state.items = action.payload.items;
@@ -16,6 +17,7 @@ const cartSlice = createSlice({
       const newItem = action.payload;
       const existingItem = state.items.find((item) => item.id === newItem.id);
       state.totalQuantity++;
+      state.changed = true;
       if (!existingItem) {
         state.items.push({
           id: newItem.id,
@@ -23,7 +25,7 @@ const cartSlice = createSlice({
           quantity: 1,
           totalPrice: newItem.price,
           name: newItem.title,
-        }); // push() should not be normally used with Redux because it mutates the state but here Redux Toolkit doen't mutate
+        }); // push() should not be normally used with Redux because it mutates the state but here Redux Toolkit doesn't mutate
       } else {
         existingItem.quantity++;
         existingItem.totalPrice = existingItem.totalPrice + newItem.price;
@@ -33,6 +35,7 @@ const cartSlice = createSlice({
       const itemToRemove = action.payload; // id
       const existingItem = state.items.find((item) => item.id === itemToRemove);
       state.totalQuantity--;
+      state.changed = true;
       if (existingItem.quantity === 1) {
         state.items = state.items.filter((item) => item.id !== itemToRemove);
       } else {
