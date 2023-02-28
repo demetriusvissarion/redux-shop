@@ -56,6 +56,7 @@ export const sendCartData = (cart) => {
           body: JSON.stringify({
             items: cart.items,
             totalQuantity: cart.totalQuantity,
+            // changed: cart.changed,
           }),
         } // 'PUT' overwrites existing data
       );
